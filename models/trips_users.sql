@@ -14,7 +14,8 @@ select
     tp.is_free,
     tp.date,
     sru.sex,
-    extract(year from tp.started_at) - extract(year from sru.birth_date) as age
+    extract(year from tp.started_at) - extract(year from sru.birth_date) as age,
+    {{ updated_at() }}
 from {{ ref("trips_prep") }} tp
 left join {{ source("scooters_raw", "users") }} sru
     on tp.user_id = sru.id
