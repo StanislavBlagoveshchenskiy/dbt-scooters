@@ -1,4 +1,4 @@
-{% macro date_in_moscow(trips_table, geom_col, grid ) %}
+{% macro trips_geom_stat(trips_table, geom_col, grid ) %}
 select
     st_transform(hex.geom, 4326) as geom,
     count(*) as trips
