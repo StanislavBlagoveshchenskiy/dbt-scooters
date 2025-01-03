@@ -1,0 +1,12 @@
+dbt_scooters:
+  outputs:
+    dev:
+      dbname: dev_ow67
+      host: dpg-ctlq63popnds73fb5340-a.frankfurt-postgres.render.com
+      pass: "{{ env_var('DBT_ENV_SECRET_PASSWORD') }}"
+      port: 5432
+      schema: dbt
+      threads: 2
+      type: postgres
+      user: admin
+  target: dev
