@@ -215,3 +215,17 @@ models:
     data_tests:
       - unique_key:
           columns: [ "month", "age", "sex" ]
+
+  - name: "revenue_user_monthly"
+    description: "Monthly total revenue by user (ignoring free trips)"
+    data_tests:
+      - unique_key:
+          columns: [ "user_id", "month" ]
+
+  - name: "revenue_monthly"
+    description: "Monthly total revenue (ignoring free trips)"
+    data_tests:
+      - unique_key:
+          columns: [ "month" ]
+      - dbt_utils.expression_is_true:
+          expression: "not(users < 1000 or revenue_median < 500)"
