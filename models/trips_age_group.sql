@@ -1,4 +1,5 @@
-select ag."group" as age_group,
+select
+    ag."group" as age_group,
     count(*) as trips,
     sum(price_rub) as revenue_rub
 from {{ ref("trips_users") }} as tu

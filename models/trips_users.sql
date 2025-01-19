@@ -16,13 +16,13 @@ select
     sru.sex,
     extract(year from tp.started_at) - extract(year from sru.birth_date) as age,
     {{ updated_at() }}
-from {{ ref("trips_prep") }} tp
-left join {{ source("scooters_raw", "users") }} sru
+from {{ ref("trips_prep") }} as tp
+left join {{ source("scooters_raw", "users") }} as sru
     on tp.user_id = sru.id
 {% if is_incremental() %}
-where tp.id > (select max(id) from {{ this }})
-order by tp.id 
-limit 75000
+    where tp.id > (select max(id) from {{ this }})
+    order by tp.id
+    limit 75000
 {% else %}
 where tp.id <= 75000
 {% endif %}
